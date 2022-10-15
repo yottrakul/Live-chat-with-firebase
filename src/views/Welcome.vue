@@ -1,17 +1,31 @@
 <template>
   <div class="welcome container">
     <p>Welcome</p>
-    <!-- <sign-up-form/> -->
-    <login-form/>
+    <div v-if="showLogin">
+      <h2>Login</h2>
+      <LoginForm/>
+      <p>No account yet? <span @click="showLogin = false">SignUp</span> instead</p>
+    </div>
+    <div v-else>
+      <h2>Sign Up</h2>
+      <SignUpForm/>
+      <p>Already registered? <span @click="showLogin = true">Login</span> instead</p>
+    </div>
   </div>
 </template>
 
 <script>
 import SignUpForm from '../components/SignUpForm.vue'
 import LoginForm from '../components/LoginForm.vue'
+import { ref } from '@vue/reactivity'
 export default {
   components: {
     SignUpForm, LoginForm
+  },
+  setup() {
+    const showLogin = ref(true)
+
+    return {showLogin}
   }
 
 }
@@ -39,5 +53,13 @@ export default {
     outline: none;
     color: #999;
     margin: 10px auto;
+  }
+  .welcome span {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .welcome button {
+    margin: 20px auto;
   }
 </style>
