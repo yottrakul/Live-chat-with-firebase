@@ -23,7 +23,6 @@ export default {
       await logout()
       if(!error.value) {
         console.log('user logout!')
-        router.push('/')
       }
     }
 
