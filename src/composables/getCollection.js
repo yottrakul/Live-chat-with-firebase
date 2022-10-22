@@ -6,11 +6,12 @@ const getCollection = (collection) => {
   const error = ref(null);
 
   let collectionRef = projectFirestore.collection(collection)
-    .orderBy('createdAt', 'desc');
+    .orderBy('createdAt', 'asc');
   
   collectionRef.onSnapshot(snap => {
     let results = [];
     snap.docs.forEach(doc => {
+      //มีการเช็คค่า createdAt ก่อนเพิ่มรันคำสั่งต่อไป
       doc.data().createdAt && results.push({ ...doc.data(), id: doc.id });
     })
     documents.value = results;
