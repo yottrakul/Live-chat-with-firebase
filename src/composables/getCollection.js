@@ -22,10 +22,13 @@ const getCollection = (collection) => {
     error.value = 'could not fetch data';
   })
 
+  // ทำให้ไม่โหลด snapshot ซ้ำ
   watchEffect((onInvalidate) => {
     //unsub  จาก collection ก่อนหน้า เมื่อ watcher หยุดไปแล้ว (component unMounted)
     onInvalidate(() => unsub())
   })
+
+  // return ค่า documents และ error ออกไป
 
   return { documents, error }
 }
